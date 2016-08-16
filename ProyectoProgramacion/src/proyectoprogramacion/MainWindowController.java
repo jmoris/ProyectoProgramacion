@@ -6,11 +6,15 @@
 package proyectoprogramacion;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -23,12 +27,20 @@ import javafx.stage.Stage;
  */
 public class MainWindowController
 {
+    ArrayList<Grafo> grafos;
     Stage stage;
     @FXML
     private Button fileButton;
     
     @FXML
     private MenuItem menuFile;
+    @FXML
+    private TabPane tabGrafos;
+    
+    public MainWindowController()
+    {
+        grafos = new ArrayList<Grafo>();
+    }
     
     @FXML
     private void initialize()
@@ -36,6 +48,26 @@ public class MainWindowController
         
     }
 
+    @FXML
+    public void nuevoGrafo(Event event)
+    {
+        /* Parte logica */
+        Grafo nuevoGrafo = new Grafo();
+        nuevoGrafo.id = grafos.size();
+        nuevoGrafo.label = "Grafo " + grafos.size();
+        grafos.add(nuevoGrafo);
+        /* Parte visual */
+        TabGrafo nuevoTab = new TabGrafo(nuevoGrafo);
+        nuevoTab.setOnCloseRequest(this::onCloseRequest);
+        tabGrafos.getTabs().add(nuevoTab);
+    }
+    
+    public void onCloseRequest(Event event)
+    {
+        TabGrafo tab = (TabGrafo)event.getSource();
+        System.out.println("Se intento cerrar el tabulador " + tab.idProperty().getValue());
+    }
+    
     public void setStage(Stage stage)
     {
         this.stage = stage;

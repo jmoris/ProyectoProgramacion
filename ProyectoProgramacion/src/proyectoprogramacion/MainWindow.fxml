@@ -36,7 +36,7 @@
             </MenuBar>
             <HBox spacing="10.0">
                <children>
-                  <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0">
+                  <Button fx:id="btnNuevo" contentDisplay="CENTER" mnemonicParsing="false" onAction="#nuevoGrafo" prefHeight="25.0" prefWidth="25.0">
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -90,13 +90,7 @@
          </children></VBox>
    </left>
    <center>
-      <TabPane tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-        <tabs>
-          <Tab text="Grafo1">
-               <content>
-                  <Canvas height="291.0" width="381.0" />
-               </content></Tab>
-        </tabs>
+      <TabPane fx:id="tabGrafos" style="-fx-border-color: #B8B8B8;" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
          </BorderPane.margin>
