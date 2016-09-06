@@ -76,8 +76,8 @@
          <children>
             <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" text="Button" />
-                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="btnCirculo" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="btnCuadrado" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Button" />
                   <Button layoutX="62.0" layoutY="10.0" mnemonicParsing="false" text="Button" />
                </children>
                <VBox.margin>
@@ -100,7 +100,19 @@
       </TabPane>
    </center>
    <right>
-      <HBox BorderPane.alignment="CENTER" />
+      <HBox BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="60.0">
+               <children>
+                  <Label text="Etiqueta" />
+               </children>
+            </VBox>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <TextField fx:id="txtLabel" />
+               </children>
+            </VBox>
+         </children></HBox>
    </right>
    <bottom>
       <HBox BorderPane.alignment="CENTER" />

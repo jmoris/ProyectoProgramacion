@@ -7,17 +7,14 @@ package proyectoprogramacion;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
 /**
@@ -27,11 +24,20 @@ import javafx.stage.Stage;
  */
 public class MainWindowController
 {
+    double orgSceneX, orgSceneY;
+    double orgTranslateX, orgTranslateY;
+    Punto centro;
+    Boolean fijar, medir;
     ArrayList<Grafo> grafos;
     Stage stage;
     @FXML
     private Button fileButton;
-    
+    @FXML
+    private Button btnCirculo;
+    @FXML
+    private Button btnCuadrado;
+    @FXML
+    private TextField txtLabel;
     @FXML
     private MenuItem menuFile;
     @FXML
@@ -40,14 +46,31 @@ public class MainWindowController
     public MainWindowController()
     {
         grafos = new ArrayList<Grafo>();
+        centro = new Punto();
     }
     
     @FXML
     private void initialize()
     {
-        
+        btnCirculo.setOnMouseClicked(this::crearCirculo);
+        btnCuadrado.setOnMouseClicked(this::crearCuadrado);
+        this.fijar = false;
+        this.medir = false;
     }
-
+    
+    private void crearCirculo(MouseEvent e){
+        this.fijar = true;
+        TabGrafo actualTab = (TabGrafo)tabGrafos.getSelectionModel().getSelectedItem();
+        actualTab.agregarNodo(true, 50, 50, 50);
+    }
+    
+    private void crearCuadrado(MouseEvent e)
+    {
+       this.fijar = true;
+       TabGrafo actualTab = (TabGrafo)tabGrafos.getSelectionModel().getSelectedItem();
+       actualTab.agregarNodo(false, 50, 50, 75); 
+    }
+    
     @FXML
     public void nuevoGrafo(Event event)
     {
@@ -57,7 +80,7 @@ public class MainWindowController
         nuevoGrafo.label = "Grafo " + grafos.size();
         grafos.add(nuevoGrafo);
         /* Parte visual */
-        TabGrafo nuevoTab = new TabGrafo(nuevoGrafo);
+        TabGrafo nuevoTab = new TabGrafo(nuevoGrafo, tabGrafos.getWidth(), tabGrafos.getHeight());
         nuevoTab.setOnCloseRequest(this::onCloseRequest);
         tabGrafos.getTabs().add(nuevoTab);
     }
