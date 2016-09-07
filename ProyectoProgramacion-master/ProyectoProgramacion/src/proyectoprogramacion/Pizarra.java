@@ -6,14 +6,17 @@
 
 package proyectoprogramacion;
 
+import objetos.Grafo;
+import objetos.Nodo;
 import java.util.ArrayList;
-import javafx.scene.input.MouseEvent;
+import java.util.Optional;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.geometry.Bounds;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.ScrollEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
+import objetos.Arista;
 
 /**
  *
@@ -25,7 +28,6 @@ public class Pizarra extends Pane
 {
     final double SCALE_DELTA = 1.1;
     Grafo grafo;
-    SelectionModel select;
     int totalNodos;
     ArrayList<Nodo> nodos;
     Nodo nuevo;
@@ -33,15 +35,12 @@ public class Pizarra extends Pane
     
     public Pizarra()
     {
+        this.setStyle("-fx-background-color:#FFFFFF");
         this.creacion = false;
-        this.select = new SelectionModel();
         grafo = new Grafo();
         this.nodos = new ArrayList<Nodo>();
         this.totalNodos = 0;
         this.setOnScroll(this::redimensionar);
-        this.setOnMouseClicked(this::click);
-        this.setOnMouseMoved(this::mueve);
-        this.setOnMouseReleased(this::quita);
     }
     
     public void redimensionar(ScrollEvent event)
@@ -61,53 +60,35 @@ public class Pizarra extends Pane
         this.setScaleY(this.getScaleY() * scaleFactor);
     }
     
-    private void click(MouseEvent e)
-    {
-        if(this.creacion)
-        {
-            nuevo = new Nodo(totalNodos, "Nodo", e.getSceneX(), e.getSceneY(), 75, 2);
-            getChildren().add(nuevo);
-            nuevo.setVisible(true);
-        }
-        
-    }
-    
-    private void select(MouseEvent e)
-    {
-        
-    }
-    private void mueve(MouseEvent e)
-    {
-        if(this.creacion)
-        {
-            if(nuevo.isVisible() && nuevo.nodo instanceof Rectangle)
-            {
-                ((Rectangle)nuevo.nodo).setWidth(e.getX() - nuevo.nodo.getTranslateX());
-                ((Rectangle)nuevo.nodo).setHeight(e.getY() - nuevo.nodo.getTranslateX());
-            }
-        }
-    }
-    
-    private void quita(MouseEvent e)
-    {
-        if(this.creacion)
-        {
-            //nuevo.setVisible(false);
-            this.creacion = false;
-        }
-    }
     
     public void añadirNodo(Boolean tipo, double x, double y, double ancho)
     {
+        String etiqueta = "";
+        TextInputDialog dialog = new TextInputDialog("");
+        dialog.setTitle("Titulo del nodo");
+        dialog.setHeaderText("Ingrese la etiqueta del nodo seleccionado.");
+        dialog.setContentText("Etiqueta:");
+
+        // Traditional way to get the response value.
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()){
+            etiqueta = result.get();
+        }
         if(tipo)
         {
-            nuevo = new Nodo(totalNodos, "Nodo", x, y, ancho, 1);
+            nuevo = new Nodo(totalNodos, etiqueta, x, y, ancho, 1);
         }else{
-            nuevo = new Nodo(totalNodos, "Nodo", x, y, ancho, 2);
+            nuevo = new Nodo(totalNodos, etiqueta, x, y, ancho, 2);
         }
         this.nodos.add(nuevo);
         this.getChildren().add(nuevo);
         this.creacion = true;
+    }
+    
+    public void añadirArista(Arista arista)
+    {
+        System.out.println("Sigue intento de creacion");
+        this.getChildren().add(arista);
     }
     
     public Nodo getNodo(int i)

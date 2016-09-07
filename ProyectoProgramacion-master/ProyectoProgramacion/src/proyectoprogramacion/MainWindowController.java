@@ -5,6 +5,8 @@
  */
 package proyectoprogramacion;
 
+import objetos.TabGrafo;
+import objetos.Grafo;
 import java.io.File;
 import java.util.ArrayList;
 import javafx.event.Event;
@@ -16,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import objetos.Arista;
 
 /**
  *
@@ -26,26 +29,24 @@ public class MainWindowController
 {
     double orgSceneX, orgSceneY;
     double orgTranslateX, orgTranslateY;
-    Punto centro;
-    Boolean fijar, medir;
     ArrayList<Grafo> grafos;
     Stage stage;
+    @FXML
+    private MenuItem menuAbrir;
     @FXML
     private Button fileButton;
     @FXML
     private Button btnCirculo;
     @FXML
     private Button btnCuadrado;
-    
     @FXML
-    private MenuItem menuFile;
+    private Button btnArista;
     @FXML
     private TabPane tabGrafos;
     
     public MainWindowController()
     {
         grafos = new ArrayList<Grafo>();
-        centro = new Punto();
     }
    
     
@@ -54,35 +55,48 @@ public class MainWindowController
     {
         btnCirculo.setOnMouseClicked(this::crearCirculo);
         btnCuadrado.setOnMouseClicked(this::crearCuadrado);
-        this.fijar = false;
-        this.medir = false;
+        btnArista.setOnMouseClicked(this::crearArista);
+    }
+    
+    private void crearArista(MouseEvent e)
+    {
+        /*TabGrafo actualTab = (TabGrafo)tabGrafos.getSelectionModel().getSelectedItem();
+        if(actualTab != null)
+        {
+            System.out.println("Se intento crear arista");
+            Arista arista = new Arista(actualTab.getNodo(0), actualTab.getNodo(1));
+            actualTab.agregarArista(arista);
+        }*/
     }
     
     private void crearCirculo(MouseEvent e){
-        this.fijar = true;
         TabGrafo actualTab = (TabGrafo)tabGrafos.getSelectionModel().getSelectedItem();
-        actualTab.agregarNodo(true, 50, 50, 50);
+        if(actualTab != null)
+            actualTab.agregarNodo(true, 50, 50, 50);
     }
     
     private void crearCuadrado(MouseEvent e)
     {
-       this.fijar = true;
        TabGrafo actualTab = (TabGrafo)tabGrafos.getSelectionModel().getSelectedItem();
-       actualTab.agregarNodo(false, 50, 50, 75); 
+       if(actualTab != null)
+        actualTab.agregarNodo(false, 50, 50, 150); 
     }
+    
+    
     
     @FXML
     public void nuevoGrafo(Event event)
     {
         /* Parte logica */
         Grafo nuevoGrafo = new Grafo();
-        nuevoGrafo.id = grafos.size();
-        nuevoGrafo.label = "Grafo " + grafos.size();
+        nuevoGrafo.setId(grafos.size());
+        nuevoGrafo.setLabel("Grafo " + grafos.size());
         grafos.add(nuevoGrafo);
         /* Parte visual */
         TabGrafo nuevoTab = new TabGrafo(nuevoGrafo, tabGrafos.getWidth(), tabGrafos.getHeight());
         nuevoTab.setOnCloseRequest(this::onCloseRequest);
         tabGrafos.getTabs().add(nuevoTab);
+        tabGrafos.getSelectionModel().select(nuevoTab);
     }
     
     public void onCloseRequest(Event event)

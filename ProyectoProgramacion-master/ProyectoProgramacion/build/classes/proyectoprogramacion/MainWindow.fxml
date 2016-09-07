@@ -18,7 +18,7 @@
               <menus>
                 <Menu mnemonicParsing="false" text="Archivo">
                   <items>
-                        <MenuItem fx:id="menuFile1" mnemonicParsing="false" onAction="#openFile" text="Nuevo Ctrl+N" />
+                        <MenuItem fx:id="menuNuevo" mnemonicParsing="false" onAction="#nuevoGrafo" text="Nuevo Ctrl+N" />
                     <MenuItem fx:id="menuFile" mnemonicParsing="false" onAction="#openFile" text="Abrir Grafo..." />
                         <MenuItem mnemonicParsing="false" text="Guardar Grafo..." />
                   </items>
@@ -126,7 +126,7 @@
                            </image>
                         </ImageView>
                      </graphic></Button>
-                  <Button layoutX="114.0" layoutY="12.0" maxHeight="50.0" maxWidth="50.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+                  <Button fx:id="btnArista" layoutX="114.0" layoutY="12.0" maxHeight="50.0" maxWidth="50.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
                      <graphic>
                         <ImageView fitHeight="51.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                            <image>

@@ -18,6 +18,7 @@
               <menus>
                 <Menu mnemonicParsing="false" text="Archivo">
                   <items>
+                        <MenuItem fx:id="menuNuevo" mnemonicParsing="false" onAction="#nuevoGrafo" text="Nuevo Ctrl+N" />
                     <MenuItem fx:id="menuFile" mnemonicParsing="false" onAction="#openFile" text="Abrir Grafo..." />
                         <MenuItem mnemonicParsing="false" text="Guardar Grafo..." />
                   </items>
@@ -44,6 +45,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <tooltip>
+                        <Tooltip text="Nuevo Grafo" />
+                     </tooltip>
                   </Button>
                   <Button fx:id="fileButton" maxHeight="25.0" maxWidth="25.0" mnemonicParsing="false" onAction="#openFile" prefHeight="25.0" prefWidth="25.0">
                      <graphic>
@@ -53,8 +57,11 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <tooltip>
+                        <Tooltip text="Abrir..." />
+                     </tooltip>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0">
+                  <Button maxWidth="25.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0">
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -62,6 +69,33 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <tooltip>
+                        <Tooltip text="Guardar como..." />
+                     </tooltip>
+                  </Button>
+                  <Button layoutX="117.0" layoutY="15.0" maxWidth="25.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0">
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../iconos/undo.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Deshacer Ctrl+Z" />
+                     </tooltip>
+                  </Button>
+                  <Button layoutX="168.0" layoutY="15.0" maxWidth="25.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0">
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../iconos/undo2.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Rehacer Ctrl+Z" />
+                     </tooltip>
                   </Button>
                </children>
                <padding>
@@ -76,9 +110,31 @@
          <children>
             <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
-                  <Button fx:id="btnCirculo" mnemonicParsing="false" text="Button" />
-                  <Button fx:id="btnCuadrado" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Button" />
-                  <Button layoutX="62.0" layoutY="10.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="btnCirculo" maxHeight="40.0" maxWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0">
+                     <graphic>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../iconos/circle.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button fx:id="btnCuadrado" layoutX="62.0" layoutY="10.0" maxHeight="50.0" maxWidth="50.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+                     <graphic>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../iconos/rectangle.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button fx:id="btnArista" layoutX="114.0" layoutY="12.0" maxHeight="50.0" maxWidth="50.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+                     <graphic>
+                        <ImageView fitHeight="51.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../iconos/segment.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
                <VBox.margin>
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
@@ -100,19 +156,7 @@
       </TabPane>
    </center>
    <right>
-      <HBox BorderPane.alignment="CENTER">
-         <children>
-            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="60.0">
-               <children>
-                  <Label text="Etiqueta" />
-               </children>
-            </VBox>
-            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <TextField fx:id="txtLabel" />
-               </children>
-            </VBox>
-         </children></HBox>
+      <HBox BorderPane.alignment="CENTER" />
    </right>
    <bottom>
       <HBox BorderPane.alignment="CENTER" />

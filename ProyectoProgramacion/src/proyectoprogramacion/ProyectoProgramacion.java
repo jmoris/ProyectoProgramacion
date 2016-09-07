@@ -5,10 +5,12 @@
  */
 package proyectoprogramacion;
 
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -17,14 +19,16 @@ import javafx.stage.Stage;
  */
 public class ProyectoProgramacion extends Application
 {
-    
     @Override
     public void start(Stage stage) throws Exception
     {
+        
         Parent root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
-        Scene scene = new Scene(root,800,600);
+        Scene scene = new Scene(root,1000,620);
         
         stage.setScene(scene);
+        stage.setTitle("Diagramador Grafos");
+        //stage.getIcons().add(new Image(this.getClass().getResourceAsStream("grafos.png")));
         stage.show();
     }
 
