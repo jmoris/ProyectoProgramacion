@@ -1,0 +1,26 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 12-sep-2016, 18:24:41
+    Author     : Jesus Moris <contacto@soluciontotal.cl>
+*/
+
+.panel {
+    -fx-background-color: #ffffff;
+}
+
+.selected-node{
+    -fx-border-color: #0066ff;
+    -fx-border-width: 3;
+    -fx-border-style: dashed;
+}
+
+.node{
+    -fx-border-color: rgba(0,0,0,0);
+    -fx-border-width: 3;
+    -fx-border-style: dashed;    
+}
+

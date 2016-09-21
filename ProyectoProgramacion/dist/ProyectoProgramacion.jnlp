@@ -8,11 +8,12 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="ProyectoProgramacion.jar" size="121627" download="eager" />
+    <jar href="ProyectoProgramacion.jar" size="135998" download="eager" />
+    <jar href="lib/simple-xml-2.7.1.jar" size="427590" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="ProyectoProgramacion" >
     <param name="requiredFXVersion" value="8.0+"/>
   </applet-desc>
-  <jfx:javafx-desc  width="800" height="600" main-class="proyectoprogramacion.ProyectoProgramacion"  name="ProyectoProgramacion" />
+  <jfx:javafx-desc  width="800" height="600" main-class="Main.ProyectoProgramacion"  name="ProyectoProgramacion" />
   <update check="always"/>
 </jnlp>
