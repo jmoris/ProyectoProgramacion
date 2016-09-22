@@ -6,7 +6,9 @@
 
 package Model;
 
+import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -30,10 +32,18 @@ public class Graph extends Pane
     private double width;
     @Element(name="Alto")
     private double height;
-    @ElementList(name="Elementos")
+    @ElementList(name="Nodos")
     private ArrayList<Node> nodeList;
+    @ElementList(name="Aristas")
+    private ArrayList<Edge> edgeList;
     private RubberBandSelection rubberSelection;
     private boolean nodeIsActive;
+    /* Atributos para agregar arista */
+    private boolean addingEdge = false;
+    private int edgeNumber = 0;
+    private Node temp1;
+    private Node temp2;
+    
     
     public Graph(@Element(name="Nombre")String graphName, @Element(name="Ancho")double width, @Element(name="Alto")double height){
         //Tamaño para ventana actual 850, 480
@@ -42,6 +52,7 @@ public class Graph extends Pane
         this.setPrefSize(this.width, this.height);
         this.nodeIsActive = false;
         this.nodeList = new ArrayList<Node>();
+        this.edgeList = new ArrayList<Edge>();
         this.graphName = graphName;
         
         // Creamos el evento para redimensionar.
@@ -51,7 +62,7 @@ public class Graph extends Pane
         this.setOnScroll(this::resize);
     }
     
-    public Graph(@Element(name="Nombre")String graphName, @ElementList(name="Elementos")ArrayList<Node> nodes, @Element(name="Ancho")double width, @Element(name="Alto")double height){
+    public Graph(@Element(name="Nombre")String graphName, @ElementList(name="Nodos")ArrayList<Node> nodes,@ElementList(name="Aristas")ArrayList<Edge> edges,@Element(name="Ancho")double width, @Element(name="Alto")double height){
         this.width = width;
         this.height = height;
         this.setPrefSize(this.width, this.height);
@@ -62,6 +73,12 @@ public class Graph extends Pane
             System.out.println("Nodo " + node.getNodeLabel() + " - posicion " + node.getPos().getPointX() + " ," + node.getPos().getPointY());
             this.getChildren().add(node);
         }
+        this.edgeList = edges;
+        for (Edge edge : edges) {
+            this.getChildren().add(edge);
+        }
+        // Se refrescan las aristas y se envian atras de los nodos.
+        refreshEdges();
         this.graphName = graphName;
         this.getStyleClass().add("panel");
         this.rubberSelection = new RubberBandSelection(this);
@@ -84,7 +101,56 @@ public class Graph extends Pane
     
     public void addNode(Node node){
         this.nodeList.add(node);
+        node.addPropertyChangeListener(this::onNodeChange);
         this.getChildren().add(node);
+    }
+    
+    public void addEdge(){
+        this.addingEdge = true;
+        this.edgeNumber = 1;
+    }
+    
+    private void onNodeChange(PropertyChangeEvent evt){
+        String propertyName = evt.getPropertyName();
+        if(propertyName == "clickedId"){
+            int id = (int)evt.getNewValue();
+            System.out.println(id);
+            if(addingEdge){
+                System.out.println("agregando nodo");
+                for (Node node : nodeList) {
+                    if(node.getNodeId() == id){
+                        if(edgeNumber == 1){
+                            System.out.println("nodo 1");
+                            this.temp1 = node;
+                            edgeNumber++;
+                            break;
+                        }
+                        if(this.temp1 != node && edgeNumber == 2){
+                            System.out.println("nodo 2");
+                            this.temp2 = node;
+                            edgeNumber++;
+                            break;
+                        }
+                    }
+                }
+                if(this.temp1 != null && this.temp2 != null && edgeNumber == 3){
+                    Edge newEdge = new Edge(this.temp1, this.temp2);
+                    edgeList.add(newEdge);
+                    this.getChildren().add(newEdge);    
+                    addingEdge = false;
+                    edgeNumber = 0;
+                }
+            }
+        }else if(propertyName == "nodePos"){
+            refreshEdges();
+        }
+    }
+    
+    private void refreshEdges(){
+        for (Edge edge : edgeList) {
+            edge.refresh();
+            edge.toBack();
+        }        
     }
     
     public Node getNode(int i){

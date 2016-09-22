@@ -60,6 +60,8 @@ public class Whiteboard extends ScrollPane
         try {
             for(int i = 0; i < this.graph.nodesCount(); i++){
                 Node node = this.graph.getNode(i);
+                if(node.getNodeLabel().isEmpty())
+                    node.setNodeLabel(" ");
                 if(!node.isVisible())
                     this.graph.removeNode(node);
             }
@@ -88,6 +90,7 @@ public class Whiteboard extends ScrollPane
             Logger.getLogger(Whiteboard.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
     /**
      * Metodo para agregar un nodo.
      * @param node 
@@ -111,6 +114,7 @@ public class Whiteboard extends ScrollPane
     public Graph getGraph(){
         return this.graph;
     }
+    
     /**
      * Metodo para leer una entrada.
      * @return 

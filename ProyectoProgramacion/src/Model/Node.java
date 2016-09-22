@@ -7,6 +7,8 @@
 package Model;
 
 import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.Optional;
 import javafx.event.ActionEvent;
 import javafx.scene.Parent;
@@ -52,7 +54,8 @@ public class Node extends Parent
     private Shape nodeForm;
     private Text nodeText;
     private ContextMenu contextMenu;
-             
+    private PropertyChangeSupport changes = new PropertyChangeSupport(this);
+    
     public Node(@Element(name="Id")int nodeId, @Element(name="Etiqueta")String nodeLabel, @Element(name="Posicion")Point pos, @Element(name="Ancho")double nodeWidth, @Element(name="Grosor") double nodeStroke, @Element(name="Tipo")int nodeType)
     {
         this.nodeId = nodeId;
@@ -67,7 +70,7 @@ public class Node extends Parent
         
         this.nodeText = new Text(this.nodeLabel);
         this.nodeText.setFill(Color.BLACK);
-        
+                
         switch(nodeType){
             case 1:
                 this.nodeForm = new Circle(this.pos.getPointX(), this.pos.getPointY(), this.nodeWidth, Color.WHITE);
@@ -85,6 +88,7 @@ public class Node extends Parent
         this.outLayout.relocate(this.pos.getPointX(), this.pos.getPointY());
         this.control = new NodeControl(this.outLayout);
         this.control.addPropertyChangeListener(this::onNodeMove);
+        this.outLayout.getStyleClass().add("node");
         this.getChildren().add(this.outLayout);
         contextMenu = new ContextMenu();
         MenuItem delete = new MenuItem("Eliminar");
@@ -147,9 +151,11 @@ public class Node extends Parent
         String propertyName = evt.getPropertyName();
         if(propertyName == "activeNode"){
             this.active = (boolean)evt.getNewValue();
+            changes.firePropertyChange("clickedId", null, this.getNodeId());
         }else{
             pos = (Point)evt.getNewValue();
             this.outLayout.relocate(pos.getPointX(), pos.getPointY());
+            changes.firePropertyChange("nodePos", null, pos);
         }
     }
 
@@ -208,4 +214,12 @@ public class Node extends Parent
     public boolean getActive(){
         return this.active;
     }
+    
+    public void addPropertyChangeListener(PropertyChangeListener l) {
+        changes.addPropertyChangeListener(l);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener l) {
+        changes.removePropertyChangeListener(l);
+    }   
 }

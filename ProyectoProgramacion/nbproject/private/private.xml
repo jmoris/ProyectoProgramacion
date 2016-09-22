@@ -9,19 +9,15 @@
             <file>file:/C:/Users/Raimundo/Desktop/UTALCA/2016-2/Proyecto%20de%20Programación/ProyectoProgramacion-master/ProyectoProgramacion/src/proyectoprogramacion/Pizarra.java</file>
         </group>
         <group name="Programacion Avanzada">
-            <file>file:/Users/Moris/Downloads/ProyectoProgramacion2/src/Model/Node.java</file>
-            <file>file:/Users/Moris/Downloads/ProyectoProgramacion2/src/Model/Edge.java</file>
-            <file>file:/Users/Moris/Downloads/ProyectoProgramacion2/src/View/MainWindow.fxml</file>
-            <file>file:/Users/Moris/Downloads/ProyectoProgramacion2/src/Model/RubberBandSelection.java</file>
-            <file>file:/Users/Moris/Downloads/ProyectoProgramacion2/src/Model/SelectionModel.java</file>
-            <file>file:/Users/Moris/Downloads/ProyectoProgramacion2/src/Model/Style.css</file>
-            <file>file:/Users/Moris/Downloads/ProyectoProgramacion2/src/Model/TabGrafo.java</file>
-            <file>file:/Users/Moris/Downloads/ProyectoProgramacion2/src/Main/ProyectoProgramacion.java</file>
-            <file>file:/Users/Moris/Downloads/ProyectoProgramacion2/src/Model/Point.java</file>
-            <file>file:/Users/Moris/Downloads/ProyectoProgramacion2/src/Model/Whiteboard.java</file>
-            <file>file:/Users/Moris/Downloads/ProyectoProgramacion2/src/Model/NodeControl.java</file>
-            <file>file:/Users/Moris/Downloads/ProyectoProgramacion2/src/Controller/MainWindowController.java</file>
-            <file>file:/Users/Moris/Downloads/ProyectoProgramacion2/src/Model/Graph.java</file>
+            <file>file:/Users/Moris/Downloads/ProyectoProgramacion/src/Model/Edge.java</file>
+            <file>file:/Users/Moris/Downloads/ProyectoProgramacion/src/Model/NodeControl.java</file>
+            <file>file:/Users/Moris/Downloads/ProyectoProgramacion/src/Model/TabGrafo.java</file>
+            <file>file:/Users/Moris/Downloads/ProyectoProgramacion/src/Controller/MainWindowController.java</file>
+            <file>file:/Users/Moris/Downloads/ProyectoProgramacion/src/Model/Node.java</file>
+            <file>file:/Users/Moris/Downloads/ProyectoProgramacion/src/Model/Whiteboard.java</file>
+            <file>file:/Users/Moris/Downloads/ProyectoProgramacion/src/Model/Graph.java</file>
+            <file>file:/Users/Moris/Downloads/ProyectoProgramacion/src/Model/Point.java</file>
+            <file>file:/Users/Moris/Downloads/ProyectoProgramacion/src/Model/SelectionModel.java</file>
         </group>
     </open-files>
 </project-private>

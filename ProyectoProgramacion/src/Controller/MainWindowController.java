@@ -61,13 +61,12 @@ public class MainWindowController {
    
 
     private void crearArista(MouseEvent e) {
-        /*TabGrafo actualTab = (TabGrafo)tabGrafos.getSelectionModel().getSelectedItem();
+        TabGrafo actualTab = (TabGrafo)tabGrafos.getSelectionModel().getSelectedItem();
         if(actualTab != null)
         {
-            System.out.println("Se intento crear arista");
-            Arista arista = new Arista(actualTab.getNodo(0), actualTab.getNodo(1));
-            actualTab.agregarArista(arista);
-        }*/
+            System.out.println("Se refresco posicion arista");
+            actualTab.getGrafo().addEdge();
+        }
     }
 
     private void crearCirculo(MouseEvent e) {
